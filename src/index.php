@@ -11,11 +11,11 @@ define('CORE', ROOT . DS . 'core');
 define('HOST', "http://$_SERVER[HTTP_HOST]");
 define('URL', "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]");
 
-require SITE_ROOT . "/app/resources/Autoloader.php";
+require SITE_ROOT . "/core/resources/Autoloader.php";
 
-App\Resources\Autoloader::register();
+Core\Resources\Autoloader::register();
 
-use App\Resources\Launcher;
+use Core\Resources\Launcher;
 
 //Initialize & launch app
 Launcher::start();
