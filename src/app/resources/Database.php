@@ -5,7 +5,7 @@ namespace App\Resources;
 use PDO;
 use PDOException;
 
-final class Database extends Singleton
+class Database
 {
 
     private $db;
@@ -19,7 +19,7 @@ final class Database extends Singleton
     /**
      * Initialise database variables.
      */
-    public function initialise()
+    public static function initialise()
     {
         $this->db_host = Settings::instance()->getSettings()->{'database'}->{'db_host'};
         $this->db_name = Settings::instance()->getSettings()->{'database'}->{'db_name'};

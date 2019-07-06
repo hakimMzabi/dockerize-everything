@@ -2,21 +2,21 @@
 
 namespace App\Resources;
 
-final class Launcher extends Singleton
+class Launcher
 {
 
     /**
      * Retrieve and call the controller.
      */
-    public function start()
+    public static function start()
     {
-        if (null == App::instance()->get('page') || App::instance()->get('page') == "" || empty($this->get('page'))) {
-            $this->controllerInit('home');
+        if (null == App::get('page') || App::get('page') == "" || empty(App::get('page'))) {
+            self::controllerInit('home');
         } else {
-            if (!file_exists("src/" . Settings::instance()->getProjectName() . "/Controllers/" . ucfirst($this->get('page')) . ".php")) {
-                $this->controllerInit('notFound');
+            if (!file_exists("src/" . Settings::getProjectName() . "/Controllers/" . ucfirst(App::get('page')) . ".php")) {
+                self::controllerInit('notFound');
             } else {
-                $this->controllerInit($this->get('page'));
+                self::controllerInit(App::get('page'));
             }
         }
     }
@@ -25,9 +25,9 @@ final class Launcher extends Singleton
      * Initialize the controller with the page name.
      * @param $page
      */
-    public function controllerInit($page)
+    public static function controllerInit($page)
     {
-        $name = Settings::instance()->getProjectName() . '\\' . 'Controllers' . '\\' . ucfirst($page);
+        $name = Settings::getProjectName() . '\\' . 'Controllers' . '\\' . ucfirst($page);
         $c = new $name;
         $c->start();
     }

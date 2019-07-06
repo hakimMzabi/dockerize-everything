@@ -2,7 +2,7 @@
 
 namespace App\Resources;
 
-final class App extends Singleton
+class App
 {
     /**
      * Display an PHP page depending on its name.
@@ -13,12 +13,12 @@ final class App extends Singleton
     {
         ob_start();
         /** @noinspection PhpUnusedLocalVariableInspection */
-        $models = App::instance()->getPageModels($page);
-        require "src/" . Settings::instance()->getSettings()->{'main_project'}->{'name'} . "/Views/content/" . $page . ".php";
+        $models = App::getPageModels($page);
+        require "src/" . Settings::getSettings()->{'main_project'}->{'name'} . "/Views/content/" . $page . ".php";
         /** @noinspection PhpUnusedLocalVariableInspection */
         $content = ob_get_contents();
         ob_end_clean();
-        require "src/" . Settings::instance()->getSettings()->{'main_project'}->{'name'} . "/Views/layout/layout.php";
+        require "src/" . Settings::getSettings()->{'main_project'}->{'name'} . "/Views/layout/layout.php";
     }
 
     /**
@@ -26,14 +26,14 @@ final class App extends Singleton
      * @param $file
      * @return mixed
      */
-    function getJsonInformation($file)
+    public static function getJsonInformation($file)
     {
         $json = file_get_contents('app/' . $file, true);
         $parsed_json = json_decode($json);
         return $parsed_json;
     }
 
-    private function getPageModels(String $test): array
+    public static function getPageModels($test)
     {
         // TODO Finish method to get page relative models
         $models = [];

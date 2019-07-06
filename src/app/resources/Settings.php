@@ -3,24 +3,24 @@
 namespace App\Resources;
 
 
-final class Settings extends Singleton
+class Settings
 {
     /**
      * Returns the settings of the application
      * @return mixed
      */
-    function getSettings()
+    public static function getSettings()
     {
-        $settings = App::instance()->getJsonInformation("settings.json");
+        $settings = App::getJsonInformation("settings.json");
         return $settings;
     }
 
     /**
      * @return String
      */
-    function getProjectName(): String
+    public static function getProjectName()
     {
-        return $this->getSettings()->{"main_project"}->{"name"};
+        return Settings::getSettings()->{"main_project"}->{"name"};
     }
 
 
