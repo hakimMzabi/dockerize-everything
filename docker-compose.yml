@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 
 services:
     web:
@@ -9,7 +9,7 @@ services:
             - ./src:/var/www/html
         links:
             - db:db
-    db:
+    mysql_db:
         image: mysql:5.5
         volumes:
             - ~/mysql:/var/lib/mysql
@@ -17,7 +17,7 @@ services:
             - "3306:3306"
         environment:
             - MYSQL_ROOT_PASSWORD=root
-    myadmin:
+    phpmyadmin:
         image: phpmyadmin/phpmyadmin
         ports:
             - "8080:80"
