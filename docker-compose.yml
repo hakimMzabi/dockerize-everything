@@ -9,7 +9,7 @@ services:
         volumes:
             - ./src:/var/www/html
         links:
-            - db:db
+            - mysql_db:db
     mysql_db:
         container_name: MYSQL
         image: mysql:5.5
@@ -25,4 +25,4 @@ services:
         ports:
             - "8080:80"
         links:
-            - db:db
+            - mysql_db:db
