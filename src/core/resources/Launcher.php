@@ -13,7 +13,7 @@ class Launcher
         if (null == App::get('page') || App::get('page') == "" || empty(App::get('page'))) {
             self::controllerInit('home');
         } else {
-            if (!file_exists("src/" . Settings::getProjectName() . "/Controllers/" . ucfirst(App::get('page')) . ".php")) {
+            if (!file_exists("app/" . Settings::getProjectName() . "/Controllers/" . ucfirst(App::get('page')) . ".php")) {
                 self::controllerInit('notFound');
             } else {
                 self::controllerInit(App::get('page'));

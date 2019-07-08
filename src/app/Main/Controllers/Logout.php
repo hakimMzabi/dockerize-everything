@@ -6,13 +6,11 @@ use Core\Resources\App;
 use Core\Resources\Database;
 use Main\Models\User;
 
-class Login{
+class Logout{
 
     public function start() {
-        $db = new Database();
-        $user = new User();
-        $user->login($db);
-        App::display('login');
+        session_destroy();
+        header("Location: /home");
     }
 
 }

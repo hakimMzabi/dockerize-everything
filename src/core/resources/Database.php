@@ -12,6 +12,7 @@ class Database
     private $db_host;
     private $db_name;
     private $db_charset;
+    private $db_port;
     private $db_username;
     private $db_password;
 
@@ -23,12 +24,12 @@ class Database
         $this->db_host = Settings::getSettings()->{'database'}->{'db_host'};
         $this->db_name = Settings::getSettings()->{'database'}->{'db_name'};
         $this->db_charset = Settings::getSettings()->{'database'}->{'db_charset'};
+        $this->db_port = Settings::getSettings()->{'database'}->{'db_port'};
         $this->db_username = Settings::getSettings()->{'database'}->{'db_username'};
         $this->db_password = Settings::getSettings()->{'database'}->{'db_password'};
 
         try {
-            $dsn = "mysql:host=$this->db_host;dbname=$this->db_name;port=3306";
-            //var_dump($dsn,$this->db_username,$this->db_password);
+            $dsn = "mysql:host=$this->db_host;dbname=$this->db_name;port=$this->db_port;charset=$this->db_charset";
             $this->db = new PDO($dsn, "$this->db_username", "$this->db_password");
             $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
