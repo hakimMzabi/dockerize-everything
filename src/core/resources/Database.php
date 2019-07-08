@@ -12,24 +12,28 @@ class Database
     private $db_host;
     private $db_name;
     private $db_charset;
+    private $db_port;
     private $db_username;
     private $db_password;
-    private $request;
 
     /**
-     * Initialise database variables.
+     * Construct Database object
      */
-    public static function initialise()
+    public function __construct()
     {
-        $this->db_host = Settings::instance()->getSettings()->{'database'}->{'db_host'};
-        $this->db_name = Settings::instance()->getSettings()->{'database'}->{'db_name'};
-        $this->db_charset = Settings::instance()->getSettings()->{'database'}->{'db_charset'};
-        $this->db_username = Settings::instance()->getSettings()->{'database'}->{'db_username'};
-        $this->db_password = Settings::instance()->getSettings()->{'database'}->{'db_password'};
+        $this->db_host = Settings::getSettings()->{'database'}->{'db_host'};
+        $this->db_name = Settings::getSettings()->{'database'}->{'db_name'};
+        $this->db_charset = Settings::getSettings()->{'database'}->{'db_charset'};
+        $this->db_port = Settings::getSettings()->{'database'}->{'db_port'};
+        $this->db_username = Settings::getSettings()->{'database'}->{'db_username'};
+        $this->db_password = Settings::getSettings()->{'database'}->{'db_password'};
+
         try {
-            $this->db = new PDO("mysql:host=$this->db_host;dbname=$this->db_name;charset=$this->db_charset", "$this->db_username", "$this->db_password");
+            $dsn = "mysql:host=$this->db_host;dbname=$this->db_name;port=$this->db_port;charset=$this->db_charset";
+            $this->db = new PDO($dsn, "$this->db_username", "$this->db_password");
             $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
+            echo $e->getMessage();
             die("Fatal error: Database doesn't exist.");
         }
 
@@ -47,6 +51,11 @@ class Database
         $request = $this->db->prepare($statement);
         $request->execute($variables);
         return $request->fetchAll();
+    }
+
+    public function execute($statement, $variables){
+        $request = $this->db->prepare($statement);
+        $request->execute($variables);
     }
 
     /**

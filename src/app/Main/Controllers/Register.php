@@ -6,13 +6,13 @@ use Core\Resources\App;
 use Core\Resources\Database;
 use Main\Models\User;
 
-class Login{
+class Register{
 
     public function start() {
         $db = new Database();
         $user = new User();
-        $user->login($db);
-        App::html('login');
+        $user->register($db);
+        App::html('register');
     }
 
 }
