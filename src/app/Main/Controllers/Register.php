@@ -12,7 +12,11 @@ class Register{
         $db = new Database();
         $user = new User();
         $user->register($db);
+<<<<<<< HEAD
         App::display('register');
+=======
+        App::html('register');
+>>>>>>> architecture
     }
 
 }

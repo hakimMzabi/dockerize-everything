@@ -4,7 +4,11 @@
   },
   "database":{
   	"db_host": "172.20.0.1",
+<<<<<<< HEAD
     "db_name": "quizz_io",
+=======
+    "db_name": "blog_io",
+>>>>>>> architecture
     "db_charset": "utf8",
     "db_port": "3306",
     "db_username": "root",

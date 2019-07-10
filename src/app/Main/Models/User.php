@@ -2,11 +2,17 @@
 
 namespace Main\Models;
 
+<<<<<<< HEAD
 use Core\Resources\Database;
 
 class User
 {
 
+=======
+class User
+{
+
+>>>>>>> architecture
     public function register($db)
     {
         if (isset($_POST['submit'])) {
@@ -38,6 +44,10 @@ class User
                 $_SESSION['first_name'] = $response[0]['first_name'];
                 $_SESSION['last_name'] = $response[0]['last_name'];
                 $_SESSION['email'] = $response[0]['email'];
+<<<<<<< HEAD
+=======
+                $_SESSION['level'] = (int)$response[0]['level'];
+>>>>>>> architecture
                 header('Location: index.php');
             } else {
                 var_dump("Wrong password.");

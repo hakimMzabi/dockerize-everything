@@ -12,7 +12,11 @@ class Login{
         $db = new Database();
         $user = new User();
         $user->login($db);
+<<<<<<< HEAD
         App::display('login');
+=======
+        App::html('login');
+>>>>>>> architecture
     }
 
 }
