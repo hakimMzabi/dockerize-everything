@@ -2,17 +2,9 @@
 
 namespace Main\Models;
 
-<<<<<<< HEAD
-use Core\Resources\Database;
-
 class User
 {
 
-=======
-class User
-{
-
->>>>>>> architecture
     public function register($db)
     {
         if (isset($_POST['submit'])) {
@@ -22,11 +14,11 @@ class User
             $password = $_POST['password'];
             $password_confirmation = $_POST['password-confirmation'];
             if ($password_confirmation === $password) {
-                $crypted_password = sha1($password);
-                $db->execute("INSERT INTO user (first_name, last_name, email, password) VALUES (?, ?, ?, ?)", [$first_name, $last_name, $email, $crypted_password]);
-                header('Location: /home');
+                $encrypted_password = sha1($password);
+                $db->execute("INSERT INTO user (first_name, last_name, email, password) VALUES (?, ?, ?, ?)", [$first_name, $last_name, $email, $encrypted_password]);
+                header('Location: /login/success');
             } else {
-                var_dump("Password doesn't match");
+                header('Location: /register/error');
             }
         }
     }
@@ -44,13 +36,10 @@ class User
                 $_SESSION['first_name'] = $response[0]['first_name'];
                 $_SESSION['last_name'] = $response[0]['last_name'];
                 $_SESSION['email'] = $response[0]['email'];
-<<<<<<< HEAD
-=======
                 $_SESSION['level'] = (int)$response[0]['level'];
->>>>>>> architecture
-                header('Location: index.php');
+                header('Location: /home/success');
             } else {
-                var_dump("Wrong password.");
+                header('Location: /login/error');
             }
         }
     }

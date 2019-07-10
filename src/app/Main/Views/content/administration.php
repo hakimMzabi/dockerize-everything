@@ -1,4 +1,16 @@
 <?php /** @noinspection ALL */ ?>
+
+<?php if (isset($models['alert'])): ?>
+    <div class="container">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Action réussie!</strong> <?= $models['alert'] ?>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+<?php endif; ?>
+
 <div class="container">
 
     <div class="card">
@@ -39,16 +51,15 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">Nom de l'article</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="Nom de l'article" aria-label="Username"
-                           aria-describedby="basic-addon1">
+                    <input type="text" class="form-control" placeholder="Nom de l'article" name="article_name">
                 </div>
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text">Contenu de l'article</span>
                     </div>
-                    <textarea class="form-control" aria-label="Contenu de l'article"></textarea>
+                    <textarea class="form-control" name="article_content" aria-label="Contenu de l'article"></textarea>
                 </div>
-                <button class="mt-3 btn btn-success" name="modify_article">Créer l'article :)</button>
+                <button class="mt-3 btn btn-success" name="create_article">Créer l'article :)</button>
             </form>
         </div>
     </div>
@@ -61,27 +72,30 @@
             Modifier un article
         </div>
         <div class="card-body">
-            <select name="" id="">
+            <select name="" id="modify_a_select">
                 <?php foreach ($models['articles'] as $article): ?>
-                    <option value="<?= $article['id']?>"><?= $article['name']?></option>
+                    <option id="modify_a" value="<?= $article['id'] ?>"><?= $article['name'] ?></option>
                 <?php endforeach; ?>
             </select>
-            <form class="mt-3" action="/administration" method="post">
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">Nom de l'article</span>
+            <?php foreach ($models['articles'] as $article): ?>
+                <form class="mt-3 form-modify" id="form-<?= $article['id'] ?>" action="/administration" method="post">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">Nom de l'article</span>
+                        </div>
+                        <input type="text" name="article_name" class="form-control" value="<?= $article['name'] ?>"
+                               placeholder="">
                     </div>
-                    <input type="text" class="form-control" placeholder="Nom de l'article" aria-label="Username"
-                           aria-describedby="basic-addon1">
-                </div>
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">Contenu de l'article</span>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Contenu de l'article</span>
+                        </div>
+                        <textarea name="article_content" class="form-control"><?= $article['content'] ?></textarea>
                     </div>
-                    <textarea class="form-control" aria-label="Contenu de l'article"></textarea>
-                </div>
-                <button class="mt-3 btn btn-warning" name="modify_article">Modifier l'article :|</button>
-            </form>
+                    <input type="hidden" name="article_identifier" value="<?= $article['id'] ?>">
+                    <button class="mt-3 btn btn-warning" name="modify_article">Modifier l'article :|</button>
+                </form>
+            <?php endforeach; ?>
         </div>
     </div>
 </div>
@@ -94,9 +108,9 @@
         <div class="card-body">
             <form action="/administration" method="post">
                 <div class="form-group">
-                    <select class="custom-select">
+                    <select name="article_identifier" class="custom-select">
                         <?php foreach ($models['articles'] as $article): ?>
-                            <option value="<?= $article['id']?>"><?= $article['name']?></option>
+                            <option value="<?= $article['id'] ?>"><?= $article['name'] ?></option>
                         <?php endforeach; ?>
                     </select>
                     <button class="mt-3 btn btn-danger" name="delete_article">Supprimer l'article :(</button>
@@ -105,3 +119,5 @@
         </div>
     </div>
 </div>
+
+

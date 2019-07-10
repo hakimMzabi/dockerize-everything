@@ -2,15 +2,21 @@
 
 namespace Main\Controllers;
 
-use Core\Resources\App;
-use Core\Resources\Database;
-use Main\Models\User;
+class Logout
+{
 
-class Logout{
+    public function start()
+    {
+        if (isset($_GET['id']) || isset($_GET['param'])) {
+            header("Location: /notFound");
+        }
+        if (isset($_SESSION) && isset($_SESSION['level'])) {
+            session_destroy();
+            header("Location: /home/deconnexion");
+        } else {
+            header("Location: /home");
+        }
 
-    public function start() {
-        session_destroy();
-        header("Location: /home");
     }
 
 }
