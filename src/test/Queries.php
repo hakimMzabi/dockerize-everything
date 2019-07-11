@@ -6,7 +6,6 @@ use Main\Models\User;
 
 class Queries extends TestCase
 {
-
     public function testInsertUser()
     {
         $db = new Database("mysql", "blog_io", "utf8", "root", "mysql");
