@@ -1,9 +1,10 @@
 <?php
 
+use PHPUnit\Framework\TestCase;
 use Core\Resources\Database;
 use Main\Models\User;
 
-class Queries extends PHPUnit_Framework_TestCase
+class Queries extends TestCase
 {
     /**
      * @var PDO
