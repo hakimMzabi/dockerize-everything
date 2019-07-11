@@ -22,7 +22,7 @@ class Queries extends TestCase
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8
         ", null);
         $user->createUser($db, 'Frederic', 'Sananes', 'fsananes@test.com', sha1('1234'));
-        $response = $db->query("SELECT * FROM user", null)->fetchAll();
+        $response = $db->query("SELECT * FROM user", null);
         $this->assertEquals(1, $response[0]['level']);
         $this->assertEquals("Frederic", $response[0]['first_name']);
         $this->assertEquals("Sananes", $response[0]['last_name']);
