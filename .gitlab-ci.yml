@@ -21,4 +21,4 @@ variables:
 test:php7.2:mysql:
   image: php:7.2
   script:
-    - ./vendor/bin/phpunit --bootstrap vendor/autoload.php .src/test/Queries
+    - ./vendor/bin/phpunit --bootstrap vendor/autoload.php ./src/test/Queries
