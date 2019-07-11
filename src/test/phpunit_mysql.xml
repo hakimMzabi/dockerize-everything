@@ -2,7 +2,7 @@
 
 <phpunit bootstrap="./Queries.php" colors="true">
     <php>
-        <var name="db_dsn" value="mysql:dbname=blog_io;host=mysql;charset=utf8;port=3306"/>
+        <var name="db_dsn" value="mysql:dbname=blog_io;host=mysql;charset=utf8"/>
         <var name="db_username" value="root"/>
         <var name="db_password" value="root"/>
     </php>

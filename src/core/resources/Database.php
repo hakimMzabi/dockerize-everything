@@ -21,7 +21,7 @@ class Database
      */
     public function __construct()
     {
-        $this->db_host = "mysql";
+        $this->db_host = "172.20.0.1";
         $this->db_name = "blog_io";
         $this->db_charset = "utf8";
         //$this->db_port = "3306";
@@ -30,7 +30,8 @@ class Database
 
         try {
             //$dsn = "mysql:host=$this->db_host;dbname=$this->db_name;port=$this->db_port;charset=$this->db_charset";
-            $dsn = "mysql:host=$this->db_host;dbname=$this->db_name;charset=$this->db_charset";
+            //$dsn = "mysql:host=$this->db_host;dbname=$this->db_name;charset=$this->db_charset";
+            $dsn = "mysql:dbname=$this->db_name;charset=$this->db_charset";
             $this->db = new PDO($dsn, "$this->db_username", "$this->db_password");
             $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
