@@ -5,18 +5,9 @@ cache:
     - vendor/
 
 before_script:
-  - apt-get update -yqq
-  - apt-get install git -yqq
-  - docker-php-ext-install pdo_mysql
+  - docker-compose up
   - curl -sS https://getcomposer.org/installer | php
   - php composer.phar install
-
-services:
-  - mysql
-
-variables:
-  MYSQL_DATABASE: blog_io
-  MYSQL_ROOT_PASSWORD: root
 
 test:php7.2:mysql:
   image: php:7.2

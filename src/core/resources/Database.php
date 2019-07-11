@@ -21,15 +21,15 @@ class Database
      */
     public function __construct()
     {
-        $this->db_host = "mysql";
-        $this->db_name = "blog_io";
-        $this->db_charset = "utf8";
-        $this->db_port = "3306";
-        $this->db_username = "root";
-        $this->db_password = "root";
+        $this->db_host = Settings::getSettings()->{'database'}->{'db_host'};
+        $this->db_name = Settings::getSettings()->{'database'}->{'db_name'};
+        $this->db_charset = Settings::getSettings()->{'database'}->{'db_charset'};
+        $this->db_port = Settings::getSettings()->{'database'}->{'db_port'};
+        $this->db_username = Settings::getSettings()->{'database'}->{'db_username'};
+        $this->db_password = Settings::getSettings()->{'database'}->{'db_password'};
 
         try {
-            $dsn = "mysql:host=$this->db_host;dbname=$this->db_name;charset=$this->db_charset";
+            $dsn = "mysql:host=$this->db_host;dbname=$this->db_name;port=$this->db_port;charset=$this->db_charset";
             $this->db = new PDO($dsn, "$this->db_username", "$this->db_password");
             $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
@@ -53,8 +53,7 @@ class Database
         return $request->fetchAll();
     }
 
-    public function execute($statement, $variables)
-    {
+    public function execute($statement, $variables){
         $request = $this->db->prepare($statement);
         $request->execute($variables);
     }
@@ -70,8 +69,7 @@ class Database
         $request->execute();
     }
 
-    public function getRequest()
-    {
+    public function getRequest(){
         return $this->request();
     }
 
