@@ -31,7 +31,7 @@ class Database
         try {
             //$dsn = "mysql:host=$this->db_host;dbname=$this->db_name;port=$this->db_port;charset=$this->db_charset";
             //$dsn = "mysql:host=$this->db_host;dbname=$this->db_name;charset=$this->db_charset";
-            $dsn = "mysql:dbname=$this->db_name;charset=$this->db_charset";
+            $dsn = "mysql:host=$this->db_host;dbname=$this->db_name;charset=$this->db_charset";
             $this->db = new PDO($dsn, "$this->db_username", "$this->db_password");
             $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
