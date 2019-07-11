@@ -26,7 +26,7 @@ class Database
         $this->db_charset = "utf8";
         //$this->db_port = "3306";
         $this->db_username = "root";
-        $this->db_password = "root";
+        $this->db_password = "mysql";
 
         try {
             //$dsn = "mysql:host=$this->db_host;dbname=$this->db_name;port=$this->db_port;charset=$this->db_charset";
