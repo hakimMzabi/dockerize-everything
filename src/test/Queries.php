@@ -6,17 +6,12 @@ use Main\Models\User;
 
 class Queries extends TestCase
 {
-    /**
-     * @var PDO
-     */
-    private $db;
 
-    public function setUp()
+    public function testInsertUser()
     {
-        $this->db = new Database();
-//        $this->pdo = new PDO($GLOBALS['db_dsn'], $GLOBALS['db_username'], $GLOBALS['db_password']);
-//        $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $this->db->execute("
+        $db = new Database();
+        $user = new User();
+        $db->execute("
         CREATE TABLE `user` (
             `id` int(11) NOT NULL AUTO_INCREMENT,
             `first_name` varchar(50) NOT NULL,
@@ -26,20 +21,8 @@ class Queries extends TestCase
             `level` int(2) NOT NULL DEFAULT '1'
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8
         ",null);
-    }
-
-    public function tearDown()
-    {
-        if (!$this->pdo)
-            return;
-        $this->pdo->query("DROP TABLE user");
-    }
-
-    public function testInsertUser()
-    {
-        $user = new User();
-        $user->createUser($this->db, 'Frederic', 'Sananes', 'fsananes@test.com', sha1('1234'));
-        $response = $this->db->query("SELECT * FROM user",null)->fetchAll();
+        $user->createUser($db, 'Frederic', 'Sananes', 'fsananes@test.com', sha1('1234'));
+        $response = $db->query("SELECT * FROM user",null)->fetchAll();
         $this->assertEquals(1, $response[0]['level']);
         $this->assertEquals("Frederic", $response[0]['first_name']);
         $this->assertEquals("Sananes", $response[0]['last_name']);
