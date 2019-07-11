@@ -11,7 +11,7 @@ before_script:
   - php composer.phar install
 
 services:
-  - mysql
+  - mysql:5.7
 
 variables:
   MYSQL_DATABASE: blog_io
