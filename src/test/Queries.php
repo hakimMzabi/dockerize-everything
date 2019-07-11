@@ -1,6 +1,5 @@
 <?php
-echo $_SERVER["DOCUMENT_ROOT"];
-require "../core/resources/Autoloader.php";
+require $_SERVER["DOCUMENT_ROOT"]."/src/core/resources/Autoloader.php";
 Core\Resources\Autoloader::register();
 
 class Queries extends PHPUnit_Framework_TestCase
