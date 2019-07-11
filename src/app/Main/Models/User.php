@@ -5,6 +5,10 @@ namespace Main\Models;
 class User
 {
 
+    public function createUser($db,$first_name,$last_name,$email,$encrypted_password){
+        $db->execute("INSERT INTO user (first_name, last_name, email, password) VALUES (?, ?, ?, ?)", [$first_name, $last_name, $email, $encrypted_password]);
+    }
+
     public function register($db)
     {
         if (isset($_POST['submit'])) {
@@ -15,7 +19,7 @@ class User
             $password_confirmation = $_POST['password-confirmation'];
             if ($password_confirmation === $password) {
                 $encrypted_password = sha1($password);
-                $db->execute("INSERT INTO user (first_name, last_name, email, password) VALUES (?, ?, ?, ?)", [$first_name, $last_name, $email, $encrypted_password]);
+                $this->createUser($db,$first_name,$last_name,$email,$encrypted_password);
                 header('Location: /login/success');
             } else {
                 header('Location: /register/error');
