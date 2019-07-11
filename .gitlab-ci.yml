@@ -5,6 +5,8 @@ cache:
     - vendor/
 
 before_script:
+  - apt install docker docker-compose
+  - apt update
   - docker-compose up
   - curl -sS https://getcomposer.org/installer | php
   - php composer.phar install
