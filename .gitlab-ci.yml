@@ -21,5 +21,5 @@ variables:
 test:php7.2:mysql:
   image: php:7.2
   script:
-    - ./vendor/bin/phpunit --configuration ./src/test/phpunit_mysql.xml --coverage-text
-    #- ./vendor/bin/phpunit --bootstrap vendor/autoload.php ./src/test/Queries
+    #- ./vendor/bin/phpunit --configuration ./src/test/phpunit_mysql.xml --coverage-text
+    - ./vendor/bin/phpunit --bootstrap vendor/autoload.php ./src/test/Queries
