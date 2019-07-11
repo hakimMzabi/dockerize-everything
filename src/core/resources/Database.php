@@ -12,7 +12,6 @@ class Database
     private $db_host;
     private $db_name;
     private $db_charset;
-    private $db_port;
     private $db_username;
     private $db_password;
 
@@ -21,16 +20,21 @@ class Database
      */
     public function __construct()
     {
-        $this->db_host = "mysql";
-        $this->db_name = "blog_io";
-        $this->db_charset = "utf8";
-        //$this->db_port = "3306";
-        $this->db_username = "root";
-        $this->db_password = "mysql";
+        if (sizeof(func_get_args()) == 5) {
+            $this->db_host = func_get_arg(0);
+            $this->db_name = func_get_arg(1);
+            $this->db_charset = func_get_arg(2);
+            $this->db_username = func_get_arg(3);
+            $this->db_password = func_get_arg(4);
+        } else {
+            $this->db_host = Settings::getSettings()->{'database'}->{'db_host'};
+            $this->db_name = Settings::getSettings()->{'database'}->{'db_name'};
+            $this->db_charset = Settings::getSettings()->{'database'}->{'db_charset'};
+            $this->db_username = Settings::getSettings()->{'database'}->{'db_username'};
+            $this->db_password = Settings::getSettings()->{'database'}->{'db_password'};
+        }
 
         try {
-            //$dsn = "mysql:host=$this->db_host;dbname=$this->db_name;port=$this->db_port;charset=$this->db_charset";
-            //$dsn = "mysql:host=$this->db_host;dbname=$this->db_name;charset=$this->db_charset";
             $dsn = "mysql:host=$this->db_host;dbname=$this->db_name;charset=$this->db_charset";
             $this->db = new PDO($dsn, "$this->db_username", "$this->db_password");
             $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -55,7 +59,8 @@ class Database
         return $request->fetchAll();
     }
 
-    public function execute($statement, $variables){
+    public function execute($statement, $variables)
+    {
         $request = $this->db->prepare($statement);
         $request->execute($variables);
     }
@@ -71,7 +76,8 @@ class Database
         $request->execute();
     }
 
-    public function getRequest(){
+    public function getRequest()
+    {
         return $this->request();
     }
 
