@@ -21,7 +21,7 @@ class Database
      */
     public function __construct()
     {
-        $this->db_host = "172.20.0.1";
+        $this->db_host = "localhost";
         $this->db_name = "blog_io";
         $this->db_charset = "utf8";
         $this->db_port = "3306";

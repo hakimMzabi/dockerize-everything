@@ -15,7 +15,7 @@ services:
   - mysql
 
 variables:
-  MYSQL_DATABASE: root
+  MYSQL_DATABASE: blog_io
   MYSQL_ROOT_PASSWORD: root
 
 test:php7.2:mysql:
